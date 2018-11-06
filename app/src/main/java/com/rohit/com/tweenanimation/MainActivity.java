@@ -10,7 +10,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
-    Animation mAlphaAnimation , mRotateAnimation , mScaleAnimation;
+    Animation mAlphaAnimation , mRotateAnimation , mScaleAnimation , mTranslateAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void translateAnimation(View view) {
+
+        mTranslateAnimation = AnimationUtils.loadAnimation(this, R.anim.translate_amination);
+        imageView.startAnimation(mTranslateAnimation);
     }
 
     public void alphaAnimation(View view) {
