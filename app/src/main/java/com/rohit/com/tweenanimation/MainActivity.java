@@ -6,8 +6,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Animation.AnimationListener {
 
     ImageView imageView;
     Animation mAlphaAnimation , mRotateAnimation , mScaleAnimation , mTranslateAnimation;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public void rotateAnimation(View view) {
 
         mRotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate_animation);
+        mRotateAnimation.setAnimationListener(this);
         imageView.startAnimation(mRotateAnimation);
 
 
@@ -31,12 +33,14 @@ public class MainActivity extends AppCompatActivity {
     public void scaleAnimation(View view) {
 
         mScaleAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_animation);
+        mScaleAnimation.setAnimationListener(this);
         imageView.startAnimation(mScaleAnimation);
     }
 
     public void translateAnimation(View view) {
 
         mTranslateAnimation = AnimationUtils.loadAnimation(this, R.anim.translate_amination);
+        mTranslateAnimation.setAnimationListener(this);
         imageView.startAnimation(mTranslateAnimation);
     }
 
@@ -44,6 +48,22 @@ public class MainActivity extends AppCompatActivity {
 
         // load animation from xml files
         mAlphaAnimation = AnimationUtils.loadAnimation(this, R.anim.alpha_anim);
+        mAlphaAnimation.setAnimationListener(this);
         imageView.startAnimation(mAlphaAnimation);
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+        Toast.makeText(this, "Animation Started", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        Toast.makeText(this, "Animation ended", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+        Toast.makeText(this, "Animation repeated", Toast.LENGTH_SHORT).show();
     }
 }
